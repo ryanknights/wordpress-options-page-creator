@@ -14,7 +14,5 @@
 		exit();
 	}
 
-	//test
-
 	require_once('inc/tms_options_page.class.php');
 ?>
