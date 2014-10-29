@@ -29,7 +29,19 @@
 			$this->key   = $options['key'];
 			$this->tabs  = $options['tabs'];
 
+			$this->enqueueAssets();
 			$this->addMenuPage();
+		}
+
+		/**
+		 * Enqueues JS/CSS for the creator
+		 *
+		 * @return void
+		 */
+
+		public function enqueueAssets ()
+		{
+			wp_enqueue_script('tms_options_page', plugin_dir_url(__FILE__) . 'assets/js/master.js', 'jquery', '1.0', true );
 		}
 
 		/**
@@ -219,6 +231,9 @@
 				case 'multiselect':
 					$callback = array(&$this, 'createMultiSelect');
 					break;
+				case 'image':
+					$callback = array(&$this, 'createImageUpload');
+					break;
 			}
 
 			add_settings_field(
@@ -392,7 +407,26 @@
 		 	}
 
 		 	echo '</select>';
-		 }		 
+		 }
+
+		/**
+		 * Displays Image Upload
+		 *
+		 * @param array $args[0] contains field id, name & value | $args[1] contains all options passed to add_settings_field
+		 * @return void	 
+		 */
+
+		 public function createImageUpload ($args)
+		 {
+		 	$fieldAtts = $args[0];
+
+		 	echo '<div data-image-parent>';
+			 	echo '<input id="'.$fieldAtts['id'].'" type="text" name="'.$fieldAtts['name'].'" value="'.$fieldAtts['value'].'" />';
+			 	echo '<button data-image-upload>Upload Image</button>';
+			 	echo '<button data-remove-image>Remove Image</button>';
+			 	echo '<img width="100" height="100" src="'.$fieldAtts['value'].'" />';
+			 echo '</div>';
+		 }			 		 
 	}
 	
 ?>
