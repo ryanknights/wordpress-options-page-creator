@@ -216,6 +216,9 @@
 				case 'tinymce':
 					$callback = array(&$this, 'createTinyMCE');
 					break;
+				case 'multiselect':
+					$callback = array(&$this, 'createMultiSelect');
+					break;
 			}
 
 			add_settings_field(
@@ -366,6 +369,30 @@
 
 		 	wp_editor($fieldAtts['value'], $fieldAtts['id'], $settings);
 		 }
+
+		/**
+		 * Displays MultiSelect Box
+		 *
+		 * @param array $args[0] contains field id, name & value | $args[1] contains all options passed to add_settings_field
+		 * @return void	 
+		 */
+
+		 public function createMultiSelect ($args)
+		 {
+		 	$fieldAtts = $args[0];
+		 	$options   = $args[1]['values'];
+
+		 	echo '<select id="'.$fieldAtts['id'].'" name="'.$fieldAtts['name'].'[]" multiple>';
+
+		 	foreach ($options as $label => $option)
+		 	{
+		 		$selected = (in_array($option, $fieldAtts['value'])) ? 'selected' : '';
+
+		 		echo '<option '.$selected.' value="'.$option.'">'.$label.'</option>';
+		 	}
+
+		 	echo '</select>';
+		 }		 
 	}
 	
 ?>
