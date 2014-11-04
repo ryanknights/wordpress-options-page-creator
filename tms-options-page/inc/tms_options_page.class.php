@@ -255,13 +255,14 @@
 
 		 private function getFieldAtts ($options)
 		 {	
-		 	$index = (!$this->tabs) ? $this->key : $options['tab'];
+		 	$index  = (!$this->tabs) ? $this->key : $options['tab'];
+		 	$values = get_option($index); 
 
 		 	return array(
 
 				'id'    => $options['id'],
 				'name'  => $index . '['.$options['section'].']' .'['.$options['id'].']',
-				'value' => get_option($index)[$options['section']][$options['id']]		 		
+				'value' => $values[$options['section']][$options['id']]	 		
 		 	);
 		 }		
 
