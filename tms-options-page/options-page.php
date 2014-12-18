@@ -1,11 +1,11 @@
 <?php
 
 /**
-* Plugin Name: Options Page Creator - TMS Media
-* Plugin URI: http://tms-media.co.uk
+* Plugin Name: Options Page Creator
+* Plugin URI: https://github.com/ryanknights/wordpress-options-page-creator/
 * Description: Exposes a class to simplify creating option pages
 * Version: 1.0
-* Author: Ryan Knights - TMS Media
+* Author: Ryan Knights
 * Author URI: http://ryanknights.co.uk
 */
 	
@@ -14,5 +14,5 @@
 		exit();
 	}
 	
-	require_once('inc/tms_options_page.class.php');
+	require_once('inc/options_page.class.php');
 ?>

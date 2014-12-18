@@ -1,6 +1,6 @@
 <?php
 	
-	class tmsOptionsCreator
+	class OptionsCreator
 	{	
 		private $title;
 		private $key;
@@ -18,8 +18,8 @@
 		{
 			$defaults = array(
 
-				'title' => 'TMS Options Page',
-				'key'   => 'tms_options_page',
+				'title' => 'Website Options Page',
+				'key'   => 'website_options_page',
 				'tabs'  => false
 			);
 
@@ -42,7 +42,7 @@
 		public function enqueueAssets ()
 		{	
 			wp_enqueue_media();
-			wp_enqueue_script('tms_options_page', plugin_dir_url(__FILE__) . 'assets/js/master.js', 'jquery', '1.0', true );
+			wp_enqueue_script('options_page_creator', plugin_dir_url(__FILE__) . 'assets/js/master.js', 'jquery', '1.0', true );
 		}
 
 		/**
@@ -153,9 +153,9 @@
 		{	
 			$defaults = array(
 
-				'id'      => 'tms_website_options_section',
-				'title'   => 'TMS Website Options Section',
-				'content' => 'This is TMS Website Options Section'
+				'id'      => 'rlk_website_options_section',
+				'title'   => 'Website Options Section',
+				'content' => 'This is Website Options Section'
 			);
 
 			$options = array_merge($defaults, $options);
