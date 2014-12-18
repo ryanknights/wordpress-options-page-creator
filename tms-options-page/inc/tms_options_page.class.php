@@ -40,7 +40,8 @@
 		 */
 
 		public function enqueueAssets ()
-		{
+		{	
+			wp_enqueue_media();
 			wp_enqueue_script('tms_options_page', plugin_dir_url(__FILE__) . 'assets/js/master.js', 'jquery', '1.0', true );
 		}
 
@@ -109,9 +110,9 @@
 		 * @return The menu page id if no tabs otherwise the passed tab		 
 		 */
 
-		private function addTo ($tab)
+		private function addTo ($options)
 		{
-			return (!$this->tabs) ? $this->key : $tab;
+			return (!$this->tabs) ? $this->key : $options['tab'];
 		}
 
 		/**
@@ -165,12 +166,12 @@
 				$options['id'], // Section id
 				$options['title'], // Section title
 				array(&$this, 'displaySection'), // Callback to display section content
-				$this->addTo($options['tab']) // page/tab to display new section on
+				$this->addTo($options) // page/tab to display new section on
 			);
 
 			register_setting( // Register new section
-				$this->addTo($options['tab']), // Page/Tab we are displaying
-				$this->addTo($options['tab']), // We are saving an array so just register the page/tab id,
+				$this->addTo($options), // Page/Tab we are displaying
+				$this->addTo($options), // We are saving an array so just register the page/tab id,
 				array(&$this, 'sanitize_callback')
 			);
 		}
@@ -240,7 +241,7 @@
 				$options['id'], // Field id, 
 				$options['title'], // Field title
 				$callback, // Callback to display the new field
-				$this->addTo($options['tab']), // Page/Tab to add new field too
+				$this->addTo($options), // Page/Tab to add new field too
 				$options['section'], // Section to add new field too
 				array($this->getFieldAtts($options), $options) // Arguments to pass to display callback
 			);
