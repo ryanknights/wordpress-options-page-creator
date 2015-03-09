@@ -61,6 +61,8 @@
 				$this->key, // Menu Slug
 				array(&$this, 'createMenuPage') // Callback to display page
 			);
+
+			add_action('admin_notices', array(&$this, 'display_validation_notices'));
 		}
 
 		/**
@@ -92,6 +94,17 @@
 				</div>
 			<?
 		}
+
+		/**
+		 * Adds call to display any validation errors when saving/updating options
+		 *
+		 * @return void
+		 */	
+
+		 public function display_validation_notices ()
+		 {
+		 	settings_errors($this->key);
+		 }	
 
 		/**
 		 * Returns the key for the first tab
@@ -185,7 +198,15 @@
 		 */
 
 		public function sanitize_callback ($values)
-		{
+		{	
+			foreach ($values as $section => $fields)
+			{
+				foreach ($fields as $key => $value)
+				{
+					$values[$section][$key] = apply_filters('validation_' . $key, $value, $key);
+				}
+			}
+
 			return $values;
 		}
 
