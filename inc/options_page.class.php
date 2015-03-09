@@ -391,7 +391,7 @@
 				$checked = ($fieldAtts['value'] == $option) ? 'checked' : '';
 
 				echo '<label for="'.$fieldAtts['id'].'_'.$option.'">'.$label.'</label>';
-				echo '<input '.$checked.' type="radio" id="'.$fieldAtts['id'].'_'.$option.'" name="'.$fieldAtts['name'].$saveAsArray.'" value="'.$option.'" />';
+				echo '<input '.$checked.' type="radio" id="'.$fieldAtts['id'].'_'.$option.'" name="'.$fieldAtts['name'].'" value="'.$option.'" />';
 			} 
 		}
 
