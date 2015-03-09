@@ -29,7 +29,9 @@
 			$this->key   = $options['key'];
 			$this->tabs  = $options['tabs'];
 
-			$this->enqueueAssets();
+			add_action('admin_enqueue_scripts', array(&$this, 'enqueueAssets'));
+
+			//$this->enqueueAssets();
 			$this->addMenuPage();
 		}
 
@@ -41,8 +43,8 @@
 
 		public function enqueueAssets ()
 		{	
-			wp_enqueue_media();
 			wp_enqueue_script('options_page_creator', plugin_dir_url(__FILE__) . 'assets/js/master.js', 'jquery', '1.0', true );
+			wp_enqueue_media();			
 		}
 
 		/**
@@ -257,13 +259,14 @@
 		 private function getFieldAtts ($options)
 		 {	
 		 	$index  = (!$this->tabs) ? $this->key : $options['tab'];
-		 	$values = get_option($index); 
+		 	$values = get_option($index);
+		 	$value  = (isset($values[$options['section']][$options['id']])) ? $values[$options['section']][$options['id']] : '';
 
 		 	return array(
 
 				'id'    => $options['id'],
 				'name'  => $index . '['.$options['section'].']' .'['.$options['id'].']',
-				'value' => $values[$options['section']][$options['id']]	 		
+				'value' => $value 		
 		 	);
 		 }		
 
