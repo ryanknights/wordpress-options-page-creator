@@ -31,7 +31,6 @@
 
 			add_action('admin_enqueue_scripts', array(&$this, 'enqueueAssets'));
 
-			//$this->enqueueAssets();
 			$this->addMenuPage();
 		}
 
